@@ -1,0 +1,2 @@
+# manufacture-agents
+initial commit
