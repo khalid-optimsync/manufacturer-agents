@@ -2,7 +2,6 @@ import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 import { promises as fs } from 'fs';
 import { join } from 'path';
-import pdfParse from 'pdf-parse';
 import fetch from 'node-fetch';
 import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
@@ -51,6 +50,8 @@ async function downloadPDF(url: string): Promise<Buffer> {
 }
 
 async function extractTextFromPDF(pdfBuffer: Buffer): Promise<string> {
+  // Dynamic import for pdf-parse to handle CommonJS in ESM context
+  const pdfParse = (await import('pdf-parse')).default || await import('pdf-parse');
   const data = await pdfParse(pdfBuffer);
   return data.text;
 }
