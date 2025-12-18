@@ -19,3 +19,5 @@ export const MANUFACTURER_POLICIES: Record<string, string> = {
   // Add more manufacturers as needed
 };
 
+
+
