@@ -51,7 +51,9 @@ async function downloadPDF(url: string): Promise<Buffer> {
 
 async function extractTextFromPDF(pdfBuffer: Buffer): Promise<string> {
   // Dynamic import for pdf-parse to handle CommonJS in ESM context
-  const pdfParse = (await import('pdf-parse')).default || await import('pdf-parse');
+const pdfParseModule = await import('pdf-parse');
+const pdfParse = (pdfParseModule as any).default ?? pdfParseModule;
+
   const data = await pdfParse(pdfBuffer);
   return data.text;
 }
